@@ -1,4 +1,3 @@
-const { exec } = require('child_process');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
@@ -6,7 +5,7 @@ module.exports = {
         .setName("ping")
         .setDescription("Responde com 'Pong!'"),
 
-    async execution(interaction){
+    async execute(interaction){
         await interaction.reply("Pong!");
     }
 }
