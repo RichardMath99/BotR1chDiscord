@@ -31,7 +31,17 @@ client.once(Events.ClientReady, c => {
 
 client.login(TOKEN);
 
-client.on(Events.InteractionCreate, intertaction => {
+client.on(Events.InteractionCreate, async intertaction => {
         console.log(intertaction);
         if(!intertaction.isChatInputCommand()) return
+        const command = intertaction.client.commands.get(intertaction.commandName)
+        if(!command) {
+            console.error("Comando nao retornado")
+            return
+        } try {
+            await command.execute(intertaction)
+        } catch (error) {
+            console.error(error)
+            await InteractionCollector.reply("Houve um erro ao executar esse comando");
+        }
 })
